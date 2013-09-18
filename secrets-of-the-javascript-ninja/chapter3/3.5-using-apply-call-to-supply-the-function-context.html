@@ -1,0 +1,41 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>   
+    <script type="text/javascript">
+      function assert(value, desc){
+          var li = document.createElement("li");
+          li.className = value ? "pass" : "fail";   // assigns a class named pass or fail,depending on value
+          li.appendChild(document.createTextNode(desc));
+          document.getElementById("results").appendChild(li);
+      }
+      
+      window.onload = function(){
+          function juggle(){
+              var result = 0;
+              for(var n = 0; n < arguments.length; n++){
+                  result += arguments[n];
+              }
+              this.result = result;    // "this" belongs to the method's owning object
+          }
+          
+          var ninja1 = {};
+          var ninja2 = {};
+          
+          juggle.apply(ninja1,[1,2,3,4]);   // apply , an array of values to be used as the invocation arguments.
+          juggle.call(ninja2,5,6,7,8);      // call , arguments are passed in the argument list rather than as an array.
+
+          assert(ninja1.result === 10, "juggled via apply");
+          assert(ninja2.result === 26, "juggled via call");
+      }
+    </script>
+    
+    <style type="text/css" media="screen">
+      #results li.pass {color:green;}
+      #results li.fail {color:red;}
+    </style>
+  </head>
+  <body>
+    <ul id="results">
+
+    </ul>
+  </body>
+</html>

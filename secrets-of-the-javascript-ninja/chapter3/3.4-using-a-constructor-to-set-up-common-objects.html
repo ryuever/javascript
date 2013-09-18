@@ -1,0 +1,46 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>   
+    <script type="text/javascript">
+      function assert(value, desc){
+          var li = document.createElement("li");
+          li.className = value ? "pass" : "fail";   // assigns a class named pass or fail,depending on value
+          li.appendChild(document.createTextNode(desc));
+          document.getElementById("results").appendChild(li);
+      }
+      
+      window.onload = function(){
+          // When invoked with the new keyword, an empty object instance will be created and passed to the 
+          // function as this(constructor’s function context)
+          function Ninja(){
+              this.skulk = function(){return this;};   
+          }
+          
+          var ninja1 = new Ninja();
+          var ninja2 = new Ninja();
+
+          // we can also regard window as this, and do like below. this is a un-meanning operation.it should be like 
+          // the operation above, some pattern without repeating code.
+          
+          // var what = Ninja();
+          // alert(what);
+          // alert(skulk);
+          assert(ninja1.skulk() === ninja1,
+                "The 1st ninja is skulking");
+          assert(ninja2.skulk() === ninja2,
+                "The 2nd ninja is skulking");
+      }
+    </script>
+    
+    <style type="text/css" media="screen">
+      #results li.pass {color:green;}
+      #results li.fail {color:red;}
+    </style>
+  </head>
+  <body>
+    <ul id="results">
+
+    </ul>
+  </body>
+</html>
+
+
