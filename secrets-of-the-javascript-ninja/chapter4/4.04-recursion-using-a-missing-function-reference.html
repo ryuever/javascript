@@ -1,0 +1,42 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>   
+    <script type="text/javascript">
+      function assert(value, desc){
+          var li = document.createElement("li");
+          li.className = value ? "pass" : "fail";   // assigns a class named pass or fail,depending on value
+          li.appendChild(document.createTextNode(desc));
+          document.getElementById("results").appendChild(li);
+      }
+      window.onload = function(){ 
+          var ninja = {
+              chirp : function(n){
+                  return n > 1 ? ninja.chirp(n-1) + "-chirp" : "chirp";
+                  // Remember that when a function is invoked as a method, the function context refers
+                  // to the object through which the method was invoked. so replace "ninja.chirp" with 
+                  // "this.chirp" will solve this exception.
+                  // return n > 1 ? this.chirp(n-1) + "-chirp" : "chirp";
+              }
+          };
+          var samurai = { chirp : ninja.chirp};
+          ninja = {};
+          try {
+              assert(samurai.chirp(3)==="chirp-chirp-chirp", 
+                     "Is this going to work?");
+          }
+          catch(e){
+              assert(false,
+                     "Uh, this isn't good! Where'd ninja.chirp go?");
+          }
+      }
+    </script>
+    <style type="text/css" media="screen">
+      #results li.pass {color:green;}
+      #results li.fail {color:red;}
+    </style>
+  </head>
+  <body>
+    <ul id="results">
+
+    </ul>
+  </body>
+</html>
