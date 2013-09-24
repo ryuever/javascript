@@ -1,0 +1,34 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <script type="text/javascript"src="../scripts/jquery-1.2.1.js"></script>
+    <script type="text/javascript"src="../scripts/assert.js"></script>
+    <style type="text/css" media="screen">
+      #results li.pass {color:green;}
+      #results li.fail {color:red;}
+    </style>
+  </head>
+  <body>
+    <ul id="results">      
+    </ul>
+    <button id="test">Click me!</button>    
+    <script type="text/javascript">
+      // force the context to be whatever object we want. 
+      function bind(context,name){
+          return function(){
+              return context[name].apply(context,arguments);
+          };
+      }
+      
+      var button = {
+          clicked: false,
+          click: function(){
+              this.clicked = true;
+              assert(button.clicked, "The button has been clicked.");
+          }
+      };
+      var elem = document.getElementById("test");
+      // use the bind() method to specify the event handler rather than using button.click directly
+      elem.addEventListener("click",bind(button,"click"),false);
+    </script>
+  </body>
+</html>

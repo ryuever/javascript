@@ -1,0 +1,27 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <script type="text/javascript"src="../scripts/jquery-1.2.1.js"></script>
+    <script type="text/javascript"src="../scripts/assert.js"></script>
+    <style type="text/css" media="screen">
+      #results li.pass {color:green;}
+      #results li.fail {color:red;}
+    </style>
+  </head>
+  <body>
+    <ul id="results">      
+    </ul>
+    <button id="test">Click me!</button>
+    <script type="text/javascript">
+      var button = {
+          clicked: false,
+          click: function(){
+              this.clicked = true;
+              alert(button.clicked);
+              assert(this.clicked, "The button has been clicked.");
+          }
+      };
+      var elem = document.getElementById("test");
+      elem.addEventListener("click",button.click,false);
+    </script>
+  </body>
+</html>

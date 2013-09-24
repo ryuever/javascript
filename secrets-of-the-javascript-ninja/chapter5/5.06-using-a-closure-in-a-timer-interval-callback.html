@@ -1,0 +1,37 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <script type="text/javascript"src="../scripts/jquery-1.2.1.js"></script>
+    <script type="text/javascript"src="../scripts/assert.js"></script>
+    <style type="text/css" media="screen">
+      #results li.pass {color:green;}
+      #results li.fail {color:red;}
+    </style>
+  </head>
+  <body>
+    <ul id="results">      
+    </ul>
+    <div id="box"> box </div>
+    <script type="text/javascript">
+      function animateIt(elementId) {
+          var elem = document.getElementById(elementId);
+          var tick = 0;
+          var timer = setInterval(function(){
+              if (tick < 100) {
+                  elem.style.left = elem.style.top = tick + "px";
+                  tick++;
+              }
+              else {
+                  clearInterval(timer);
+                  assert(tick == 100,
+                         "Tick accessed via a closure.");
+                  assert(elem,
+                         "Element also accessed via a closure.");
+                  assert(timer,
+                         "Timer reference also obtained via a closure." );
+              }
+          }, 10);
+      }
+      animateIt('box');
+    </script>
+  </body>
+</html>

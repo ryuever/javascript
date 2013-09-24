@@ -1,0 +1,24 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <script type="text/javascript"src="../scripts/jquery-1.2.1.js"></script>
+    <script type="text/javascript"src="../scripts/assert.js"></script>
+    <style type="text/css" media="screen">
+      #results li.pass {color:green;}
+      #results li.fail {color:red;}
+    </style>
+  </head>
+  <body>
+    <ul id="results">      
+    </ul>
+    <div>DIV 0</div>
+    <div>DIV 1</div>
+    <script type="text/javascript">
+      var div = document.getElementsByTagName("div");
+      for (var i = 0; i < div.length; i++) (function(n){
+          div[n].addEventListener("click", function(){
+              alert("div #" + n + " was clicked.");
+          }, false);
+      })(i); // the i variable is defined anew, giving the closure of the click handler the value we expect
+    </script>
+  </body>
+</html>

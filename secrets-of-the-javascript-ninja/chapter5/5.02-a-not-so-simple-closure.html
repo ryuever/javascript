@@ -1,0 +1,34 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>   
+    <script type="text/javascript">
+      function assert(value, desc){
+          var li = document.createElement("li");
+          li.className = value ? "pass" : "fail";   // assigns a class named pass or fail,depending on value
+          li.appendChild(document.createTextNode(desc));
+          document.getElementById("results").appendChild(li);
+      }
+    </script>
+    <style type="text/css" media="screen">
+      #results li.pass {color:green;}
+      #results li.fail {color:red;}
+    </style>
+  </head>
+  <body>
+    <ul id="results">      
+    </ul>
+    <script type="text/javascript">
+      var outerValue = 'ninja';
+      var later;
+      function outerFunction(){
+          var innerValue = 'samurai';
+          function innerFunction(){
+              assert(outerValue,"I can see the ninja;");
+              assert(innerValue,"I can see the samurai;");
+          }
+          later = innerFunction;
+      }
+      outerFunction();
+      later();
+    </script>
+  </body>
+</html>

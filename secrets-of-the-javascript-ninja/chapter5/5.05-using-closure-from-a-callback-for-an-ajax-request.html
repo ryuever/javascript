@@ -1,0 +1,30 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <script type="text/javascript"src="../scripts/jquery-1.2.1.js"></script>
+    <script type="text/javascript"src="../scripts/assert.js"></script>
+    <style type="text/css" media="screen">
+      #results li.pass {color:green;}
+      #results li.fail {color:red;}
+    </style>
+  </head>
+  <body>
+    <div id="testSubject"></div>
+    <button type="button" id="testButton">Go!</button>
+    <ul id="results">      
+    </ul>
+    <script type="text/javascript">
+      jQuery("#testButton").click(function(){
+          var elem$ = jQuery("#testSubject");
+          elem$.html("loading....");
+          jQuery.ajax({
+              url: "test.html",
+              success: function(html){
+                  assert(elem$,
+                         "We can see elem$, via the closure for this callback.");
+                  elem$.html(html);
+              }
+          });
+      });
+    </script>
+  </body>
+</html>

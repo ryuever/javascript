@@ -1,0 +1,25 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <script type="text/javascript"src="../scripts/jquery-1.2.1.js"></script>
+    <script type="text/javascript"src="../scripts/assert.js"></script>
+    <style type="text/css" media="screen">
+      #results li.pass {color:green;}
+      #results li.fail {color:red;}
+    </style>
+  </head>
+  <body>
+    <ul id="results">      
+    </ul>
+    <div>DIV 0</div>
+    <div>DIV 1</div>
+    <script type="text/javascript">
+      var divs = document.getElementsByTagName("div");
+      // every bound function handler will always alert the last value stored in i;
+      for (var i = 0; i < divs.length; i++) {
+          divs[i].addEventListener("click", function() {
+              alert("divs #" + i + " was clicked.");
+          }, false);
+      }
+    </script>
+  </body>
+</html>

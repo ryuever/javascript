@@ -1,0 +1,38 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <script type="text/javascript"src="../scripts/jquery-1.2.1.js"></script>
+    <script type="text/javascript"src="../scripts/assert.js"></script>
+    <script type="text/javascript">
+      Function.prototype.partial = function() {
+          var fn = this, args = Array.prototype.slice.call(arguments);
+          return function() {
+              var arg = 0;
+              for (var i = 0; i < args.length && arg < arguments.length; i++) {
+                  if (args[i] === undefined) {
+                      args[i] = arguments[arg++];
+                  }
+              }
+              alert(args);
+              // args = [function (){assert(true,"A call to this function will be delayed 10 ms.");},10]
+              return fn.apply(this, args);
+          };
+      };
+    </script>
+    <style type="text/css" media="screen">
+      #results li.pass {color:green;}
+      #results li.fail {color:red;}
+    </style>
+  </head>
+  <body>
+    <ul id="results">      
+    </ul>
+    <script type="text/javascript">
+      var delay = setTimeout.partial(undefined, 10);
+      alert(delay);
+      delay(function(){
+          assert(true,
+                 "A call to this function will be delayed 10 ms.");
+      });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,40 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <script type="text/javascript"src="../scripts/jquery-1.2.1.js"></script>
+    <script type="text/javascript"src="../scripts/assert.js"></script>
+    <style type="text/css" media="screen">
+      #results li.pass {color:green;}
+      #results li.fail {color:red;}
+    </style>
+  </head>
+  <body>
+    <ul id="results">      
+    </ul>
+    <script type="text/javascript">
+      Function.prototype.bind = function(){
+          var fn = this, args = Array.prototype.slice.call(arguments),
+          //var fn = this, args = arguments,
+          object = args.shift();
+          return function(){
+              return fn.apply(object,
+                              args.concat(Array.prototype.slice.call(arguments)));
+          };
+      };
+      
+      var myObject = {};
+      var test = [1,2];
+      function myFunction(p){
+          if(!p){
+              alert("p is empty");
+          }else{
+              alert(p);
+          }
+          return this == myObject;
+      }
+      assert( !myFunction(), "Context is not set yet" );
+      var aFunction = myFunction.bind(myObject,test)
+      assert( aFunction(), "Context is set properly" );
+      alert(aFunction);
+    </script>
+  </body>
+</html>
